@@ -2,7 +2,7 @@
   <div id="app" class="small-container">
     <h1>Employees</h1>
     <employee-form @add:employee="addEmployee" />
-    <employee-table v-bind:employees="employees" />
+    <employee-table v-bind:employees="employees" @delete:employee="deleteEmployee" />
   </div>
 </template>
 
@@ -43,6 +43,9 @@
         const id = lastId + 1;
         const newEmployee = { ...employee, id };
         this.employees = [...this.employees, newEmployee];
+      },
+      deleteEmployee(id) {
+        this.employees = this.employees.filter( employee => employee.id !== id )
       }
     }
   }
