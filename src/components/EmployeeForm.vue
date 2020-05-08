@@ -2,11 +2,36 @@
   dev#employee-form
     form(@submit.prevent="handleSubmit")
       label Day
-      input(type="date" :class="{ 'hass-error': submitting && invalidDay }" v-model="employee.day" @focus="clearStatus" ref="first")
+      input(
+        type="date"
+        :class="{ 'hass-error': submitting && invalidDay }"
+        v-model="employee.day"
+        @focus="clearStatus"
+        ref="first"
+      )
       label Employee name
-      input(type="text" :class="{ 'has-error': submitting && invalidName }" v-model="employee.name" @focus="clearStatus" @keypress="clearStatus")
+      input(
+        type="text"
+        :class="{ 'has-error': submitting && invalidName }"
+        v-model="employee.name"
+        @focus="clearStatus"
+        @keypress="clearStatus"
+      )
       label Employee Email
-      input(type="text" :class="{ 'has-error': submitting && invalidEmail }" v-model="employee.email" @focus="clearStatus" @keypress="clearStatus")
+      input(
+        type="text"
+        :class="{ 'has-error': submitting && invalidEmail }"
+        v-model="employee.email"
+        @focus="clearStatus"
+        @keypress="clearStatus"
+      )
+      label Image File
+      input(
+        type="file"
+        class="input_image"
+        @change="onDrop($event)"
+      )
+      <img :src="data.image">
       p.error-message(v-if="error && submitting")
         | ❗Please fill out all required fields
       p.success-message(v-if="success")
@@ -28,6 +53,9 @@ export default {
         email: '',
         day: '',
       },
+      data: {
+        image: null,
+      }
     }
   },
   methods: {
@@ -54,6 +82,28 @@ export default {
     clearStatus(){
       this.success = false
       this.error = false
+    },
+    //onSubmit:function () {
+//
+    //  let data = new FormData();
+    //  data.append('files[]',this.files);
+//
+    //  axios
+    //    .post('/file',data)
+    //    .then(function(response) {
+    //      console.log(response.data);
+    //    })
+    //    .catch(function(error) {
+    //      console.log(error);
+    //    })
+    //},
+    onDrop(event) {
+      const file = (event.target.files || event.dataTransfer)[0]
+      if (file.type.startsWith("image/")) {
+        this.data.image = window.URL.createObjectURL(file);
+        this.data.name = file.name;
+        this.data.type = file.type;
+      }
     },
   },
   computed: {
@@ -96,6 +146,11 @@ export default {
     border: 1px solid #555
     border-radius: 5px
 
+  .input_image
+    border: none
+    width: 250px
+    height: 20px
+
   button
     padding: 10px 20px
     font-size: 16px
@@ -106,4 +161,10 @@ export default {
 
   button:hover
     box-shadow: 0px 0px 1px rgb(68, 68, 68)
+
+  img
+    max-width: 100%
+    height: auto
+    object-fit: cover
+
 </style>>
