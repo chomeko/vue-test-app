@@ -27,16 +27,19 @@
             id: 1,
             name: 'Richard Hendricks',
             email: 'richard@piedpiper.com',
+            day: '2020-05-03',
           },
           {
             id: 2,
             name: 'Bertram Gilfoyle',
             email: 'gilfoyle@piedpiper.com',
+            day: '2020-05-04',
           },
           {
             id: 3,
             name: 'Dinesh Chugtai',
             email: 'dinesh@piedpiper.com',
+            day: '2020-05-06',
           }
         ]
       }
@@ -65,7 +68,7 @@
   }
 
   .small-container {
-    max-width: 680px;
+    max-width: 789px;
     margin: auto;
   }
 </style>

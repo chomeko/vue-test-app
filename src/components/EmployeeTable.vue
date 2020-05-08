@@ -9,6 +9,7 @@
           <th>Employee name</th>
           <th>Employee email</th>
           <th>Actions</th>
+          <th>Day</th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,7 @@
             <button @click="editMode(employee.id)">Edit</button>
             <button @click="$emit('delete:employee', employee.id)">Delete</button>
           </td>
+          <td>{{ employee.day }}</td>
         </tr>
       </tbody>
     </table>

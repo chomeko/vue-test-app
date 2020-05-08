@@ -1,6 +1,14 @@
 <template>
   <dev id="employee-form">
     <form @submit.prevent="handleSubmit">
+      <label>Day</label>
+      <input
+        type="date"
+        :class="{ 'hass-error': submitting && invalidDay }"
+        v-model="employee.day"
+        @focus="clearStatus"
+        ref="first"
+      />
       <label>Employee name</label>
       <input
         type="text"
@@ -8,7 +16,6 @@
         v-model="employee.name"
         @focus="clearStatus"
         @keypress="clearStatus"
-        ref="first"
       />
       <label>Employee Email</label>
       <input
@@ -40,7 +47,8 @@ export default {
       employee: {
         name: '',
         email: '',
-      }
+        day: '',
+      },
     }
   },
   methods: {
@@ -48,7 +56,7 @@ export default {
       this.submitting = true
       this.clearStatus()
 
-      if (this.invalidName || this.invalidEmail){
+      if (this.invalidName || this.invalidEmail || this.invalidDay){
         this.error = true
         return
       }
@@ -58,6 +66,7 @@ export default {
       this.employee = {
         name: '',
         email: '',
+        day: '',
       }
       this.error = false
       this.success = true
@@ -66,7 +75,7 @@ export default {
     clearStatus(){
       this.success = false
       this.error = false
-    }
+    },
   },
   computed: {
     invalidName(){
@@ -74,6 +83,9 @@ export default {
     },
     invalidEmail(){
       return this.employee.email === ''
+    },
+    invalidDay(){
+      return this.employee.day === ''
     },
   },
 }
