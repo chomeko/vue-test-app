@@ -1,41 +1,29 @@
-<template>
-  <div id="employee-table">
-    <p v-if="employees.length < 1" class="empty-table">
-      No employees
-    </p>
-    <table>
-      <thead>
-        <tr>
-          <th>Employee name</th>
-          <th>Employee email</th>
-          <th>Actions</th>
-          <th>Day</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="employee in employees" v-bind:key="employee.id">
-          <td v-if="editing === employee.id">
-            <input type="text" v-model="employee.name" />
-          </td>
-          <td v-else>{{ employee.name }}</td>
-          <td v-if="editing === employee.id">
-            <input type="text" v-model="employee.email" />
-          </td>
-          <td v-else>{{ employee.email }}</td>
-
-          <td v-if="editing === employee.id">
-            <button @click="editEmployee(employee)">Save</button>
-            <button class="muted-button" @click="editing = null">Cancel</button>
-          </td>
-          <td v-else>
-            <button @click="editMode(employee.id)">Edit</button>
-            <button @click="$emit('delete:employee', employee.id)">Delete</button>
-          </td>
-          <td>{{ employee.day }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<template lang="pug">
+  #employee-table
+    p.empty-table(v-if="employees.length < 1")
+      | No employees
+    table
+      thead
+        tr
+          th Employee name
+          th Employee email
+          th Actions
+          th Day
+      tbody
+        tr(v-for="employee in employees" v-bind:key="employee.id")
+          td(v-if="editing === employee.id")
+            input(type="text" v-model="employee.name")
+          td(v-else="") {{ employee.name }}
+          td(v-if="editing === employee.id")
+            input(type="text" v-model="employee.email")
+          td(v-else="") {{ employee.email }}
+          td(v-if="editing === employee.id")
+            button(@click="editEmployee(employee)") Save
+            button.muted-button(@click="editing = null") Cancel
+          td(v-else="")
+            button(@click="editMode(employee.id)") Edit
+            button(@click="$emit('delete:employee', employee.id)") Delete
+          td {{ employee.day }}
 </template>
 
 <script>
@@ -62,14 +50,13 @@
   }
 </script>
 
-<style scoped>
-  th,td {
-    padding: 10px;
-    width: 340px;
-    text-align-last: left;
-    border-bottom: 1px solid #000;
-  }
-  button {
-    margin: 0 0.5rem 0 0 ;
-  }
+<style scoped lang="sass">
+  th,td
+    padding: 10px
+    width: 340px
+    text-align-last: left
+    border-bottom: 1px solid #000
+
+  button
+    margin: 0 0.5rem 0 0
 </style>

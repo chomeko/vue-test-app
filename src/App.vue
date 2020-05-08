@@ -1,13 +1,8 @@
-<template>
-  <div id="app" class="small-container">
-    <h1>Employees</h1>
-    <employee-form @add:employee="addEmployee" />
-    <employee-table
-      v-bind:employees="employees"
-      @delete:employee="deleteEmployee"
-      @edit:employee="editEmployee"
-    />
-  </div>
+<template lang="pug">
+  #app.small-container
+    h1 Employees
+    employee-form(@add:employee="addEmployee")
+    employee-table(v-bind:employees="employees" @delete:employee="deleteEmployee" @edit:employee="editEmployee")
 </template>
 
 <script>
@@ -61,14 +56,12 @@
   }
 </script>
 
-<style>
-  button {
-    background: #009435;
-    border: 1px solid #009435;
-  }
+<style lang="sass">
+  button
+    background: #009435
+    border: 1px solid #009435
 
-  .small-container {
-    max-width: 789px;
-    margin: auto;
-  }
+  .small-container
+    max-width: 789px
+    margin: auto
 </style>
